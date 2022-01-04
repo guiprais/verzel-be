@@ -15,6 +15,11 @@ const ModuleRepository = {
     return row;
   },
 
+  findByModuleId: async (id: string) => {
+    const [row] = await db('SELECT * FROM modules WHERE id = $1', [id]);
+    return row;
+  },
+
   create: async ({ name }: CreateParams) => {
     const [row] = await db('INSERT INTO modules(name) VALUES ($1) RETURNING *', [name]);
     return row;

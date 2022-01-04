@@ -2,7 +2,8 @@ import { db } from '../database';
 
 type CreateParams = {
   name: string;
-  module: string;
+  module_id: string;
+  class_date: string;
 }
 
 const ClassRepository = {
@@ -11,8 +12,8 @@ const ClassRepository = {
     return rows;
   },
 
-  create: async ({ name, module }: CreateParams) => {
-    const [row] = await db('INSERT INTO classes(name, module) VALUES ($1, $2) RETURNING *', [name, module]);
+  create: async ({ name, module_id, class_date }: CreateParams) => {
+    const [row] = await db('INSERT INTO classes(name, module_id, class_date) VALUES ($1, $2, $3) RETURNING *', [name, module_id, class_date]);
     return row;
   },
 };
