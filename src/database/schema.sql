@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS modules (
 CREATE TABLE IF NOT EXISTS classes (
   id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   name VARCHAR NOT NULL,
+  class_date DATE NOT NULL,
   module_id UUID,
-  FOREIGN KEY (module_id) REFERENCES module(id)
+  FOREIGN KEY (module_id) REFERENCES modules(id)
 );
