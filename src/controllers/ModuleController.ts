@@ -1,21 +1,33 @@
 import { Request, Response } from 'express';
 
-const index = async (request: Request, response: Response) => {
-  response.json('index route');
+import ModuleRepository from '../repositories/ModuleRepository';
+
+const ModuleController = {
+  index: async (_request: Request, response: Response) => {
+    const modules = await ModuleRepository.findAll();
+
+    return response.json(modules);
+  },
+
+  store: async (request: Request, response: Response) => {
+    const { name } = request.body;
+
+    if (!name) {
+      return response.status(400).send({ error: 'Name is required' });
+    }
+
+    const module = await ModuleRepository.create({ name });
+
+    return response.json(module);
+  },
+
+  update: async (request: Request, response: Response) => {
+    response.send('update route');
+  },
+
+  remove: async (request: Request, response: Response) => {
+    response.send('remove route');
+  },
 };
 
-const store = async (request: Request, response: Response) => {
-  response.send('store route');
-};
-
-const update = async (request: Request, response: Response) => {
-  response.send('update route');
-};
-
-const remove = async (request: Request, response: Response) => {
-  response.send('remove route');
-};
-
-export {
-  index, store, update, remove,
-};
+export default ModuleController;
