@@ -29,7 +29,28 @@ const ClassController = {
   },
 
   update: async (request: Request, response: Response) => {
-    response.send('update route');
+    const { id } = request.params;
+    const { name, module_id, class_date } = request.body;
+
+    if (!name) {
+      return response.status(404).send({ error: 'Name is required' });
+    }
+
+    const classExists = await ClassRepository.findById(id);
+
+    if (!classExists) {
+      return response.status(404).send({ error: 'Class not found' });
+    }
+
+    const moduleExists = await ModuleRepository.findById(module_id);
+
+    if (!moduleExists) {
+      return response.status(404).send({ error: 'Module not found' });
+    }
+
+    const grade = await ClassRepository.update(id, { name, module_id, class_date });
+
+    return response.json(grade);
   },
 
   remove: async (request: Request, response: Response) => {
