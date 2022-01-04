@@ -22,7 +22,22 @@ const ModuleController = {
   },
 
   update: async (request: Request, response: Response) => {
-    response.send('update route');
+    const { id } = request.params;
+    const { name } = request.body;
+
+    if (!name) {
+      return response.status(404).send({ error: 'Name is required' });
+    }
+
+    const moduleExists = await ModuleRepository.findById(id);
+
+    if (!moduleExists) {
+      return response.status(404).send({ error: 'Module not found' });
+    }
+
+    const module = await ModuleRepository.update(id, { name });
+
+    return response.json(module);
   },
 
   remove: async (request: Request, response: Response) => {
