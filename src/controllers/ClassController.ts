@@ -53,8 +53,12 @@ const ClassController = {
     return response.json(grade);
   },
 
-  remove: async (request: Request, response: Response) => {
-    response.send('remove route');
+  delete: async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    await ClassRepository.delete(id);
+
+    return response.sendStatus(204);
   },
 };
 

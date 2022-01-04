@@ -37,6 +37,11 @@ const ClassRepository = {
     `, [name, module_id, class_date, id]);
     return row;
   },
+
+  delete: async (id: string) => {
+    const deleteOp = await db('DELETE FROM classes WHERE id = $1', [id]);
+    return deleteOp;
+  },
 };
 
 export default ClassRepository;
