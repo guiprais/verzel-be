@@ -1,21 +1,25 @@
 import { Request, Response } from 'express';
 
-const index = async (request: Request, response: Response) => {
-  response.send('index route');
+import ClassRepository from '../repositories/ClassRepository';
+
+const ClassController = {
+  index: async (_request: Request, response: Response) => {
+    const classes = await ClassRepository.findAll();
+
+    response.json(classes);
+  },
+
+  store: async (request: Request, response: Response) => {
+    response.send('store route');
+  },
+
+  update: async (request: Request, response: Response) => {
+    response.send('update route');
+  },
+
+  remove: async (request: Request, response: Response) => {
+    response.send('remove route');
+  },
 };
 
-const store = async (request: Request, response: Response) => {
-  response.send('store route');
-};
-
-const update = async (request: Request, response: Response) => {
-  response.send('update route');
-};
-
-const remove = async (request: Request, response: Response) => {
-  response.send('remove route');
-};
-
-export {
-  index, store, update, remove,
-};
+export default ClassController;

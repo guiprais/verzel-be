@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 const index = async (request: Request, response: Response) => {
-  response.send('index route');
+  response.json('index route');
 };
 
 const store = async (request: Request, response: Response) => {

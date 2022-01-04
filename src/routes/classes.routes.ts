@@ -1,7 +1,9 @@
 import { Router } from 'express';
 
+import ClassController from '../controllers/ClassController';
+
 const classRouter = Router();
 
-classRouter.get('/');
+classRouter.get('/classes', ClassController.index);
 
 export default classRouter;
