@@ -24,6 +24,11 @@ const ModuleRepository = {
     const [row] = await db('UPDATE modules SET name = $1 WHERE id = $2 RETURNING *', [name, id]);
     return row;
   },
+
+  delete: async (id: string) => {
+    const deleteOp = await db('DELETE FROM modules WHERE id = $1', [id]);
+    return deleteOp;
+  },
 };
 
 export default ModuleRepository;

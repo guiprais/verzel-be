@@ -40,8 +40,12 @@ const ModuleController = {
     return response.json(module);
   },
 
-  remove: async (request: Request, response: Response) => {
-    response.send('remove route');
+  delete: async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    await ModuleRepository.delete(id);
+
+    return response.sendStatus(204);
   },
 };
 
