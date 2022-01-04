@@ -16,6 +16,12 @@ const ModuleController = {
       return response.status(400).send({ error: 'Name is required' });
     }
 
+    const moduleExists = await ModuleRepository.findByName(name);
+
+    if (moduleExists) {
+      return response.status(400).send({ error: 'Module already exists' });
+    }
+
     const module = await ModuleRepository.create({ name });
 
     return response.json(module);

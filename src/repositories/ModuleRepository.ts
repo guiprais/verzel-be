@@ -15,8 +15,8 @@ const ModuleRepository = {
     return row;
   },
 
-  findByModuleId: async (id: string) => {
-    const [row] = await db('SELECT * FROM modules WHERE id = $1', [id]);
+  findByName: async (name: string) => {
+    const [row] = await db('SELECT * FROM modules WHERE name = $1', [name]);
     return row;
   },
 

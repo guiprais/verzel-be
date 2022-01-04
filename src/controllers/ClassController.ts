@@ -17,7 +17,7 @@ const ClassController = {
       return response.status(400).send({ error: 'Name/moduleId is required' });
     }
 
-    const moduleIdExists = await ModuleRepository.findByModuleId(module_id);
+    const moduleIdExists = await ModuleRepository.findById(module_id);
 
     if (!moduleIdExists) {
       return response.status(404).send({ error: 'Module not found' });
