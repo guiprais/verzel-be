@@ -13,8 +13,12 @@ const ClassController = {
   store: async (request: Request, response: Response) => {
     const { name, module_id, class_date } = request.body;
 
-    if (!name || !module_id) {
-      return response.status(400).send({ error: 'Name/moduleId is required' });
+    if (!name) {
+      return response.status(400).send({ error: 'Name is required' });
+    }
+
+    if (!class_date) {
+      return response.status(400).send({ error: 'Date is required' });
     }
 
     const moduleIdExists = await ModuleRepository.findById(module_id);
