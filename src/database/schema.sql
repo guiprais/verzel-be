@@ -14,3 +14,9 @@ CREATE TABLE IF NOT EXISTS classes (
   module_id UUID,
   FOREIGN KEY (module_id) REFERENCES modules(id)
 );
+
+CREATE TABLE IF NOT EXISTS users (
+  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  email VARCHAR NOT NULL,
+  password VARCHAR NOT NULL
+);
