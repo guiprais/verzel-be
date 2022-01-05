@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import { classRouter, moduleRouter } from './routes';
+import { classRouter, moduleRouter, userRouter } from './routes';
 
 dotenv.config();
 
@@ -13,5 +13,6 @@ app.use(express.json());
 
 app.use(classRouter);
 app.use(moduleRouter);
+app.use(userRouter);
 
 app.listen(process.env.PORT, () => console.log(`Listening on http://localhost:${process.env.PORT}`));
