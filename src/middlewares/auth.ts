@@ -12,7 +12,7 @@ const auth = {
         try {
           verify(token, process.env.JWT_SECRET_KEY as string);
           success = true;
-        } catch (err) {
+        } catch {
           console.log('Erro no JWT');
         }
       }

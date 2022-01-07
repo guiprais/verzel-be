@@ -40,6 +40,10 @@ const ClassController = {
       return response.status(404).send({ error: 'Name is required' });
     }
 
+    if (!class_date) {
+      return response.status(400).send({ error: 'Date is required' });
+    }
+
     const classExists = await ClassRepository.findById(id);
 
     if (!classExists) {
