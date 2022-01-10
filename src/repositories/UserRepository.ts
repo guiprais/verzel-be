@@ -11,8 +11,8 @@ const userController = {
     return row;
   },
 
-  findByPassword: async (password: string) => {
-    const [row] = await db('SELECT * FROM users WHERE password = $1', [password]);
+  findUser: async ({ email, password } : {email: string, password: string}) => {
+    const [row] = await db('SELECT * FROM users WHERE (email = $1 AND password = $2)', [email, password]);
     return row;
   },
 

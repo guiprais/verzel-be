@@ -41,24 +41,24 @@ const userController = {
       return response.status(400).send({ error: 'Password is required' });
     }
 
-    const user = await UserRepository.findByEmail(email);
+    const userEmail = await UserRepository.findByEmail(email);
+
+    if (!userEmail) {
+      return response.status(404).send({ error: 'Incorrect e-mail/password combination.' });
+    }
+
+    const user = await UserRepository.findUser({ email, password });
 
     if (!user) {
       return response.status(404).send({ error: 'Incorrect e-mail/password combination.' });
     }
 
-    const passwordExists = await UserRepository.findByPassword(password);
-
-    if (!passwordExists) {
-      return response.status(404).send({ error: 'Incorrect e-mail/password combination.' });
-    }
-
-    const token = sign({ id: user.id, email: user.email }, '9f05aa4202e4ce8d6a72511dc735cce9', {
-      subject: user.id,
+    const token = sign({ id: userEmail.id, email: userEmail.email }, '9f05aa4202e4ce8d6a72511dc735cce9', {
+      subject: userEmail.id,
       expiresIn: '1d',
     });
 
-    return response.status(200).json({ email: user.email, token });
+    return response.status(200).json({ email: userEmail.email, token });
   },
 };
 
